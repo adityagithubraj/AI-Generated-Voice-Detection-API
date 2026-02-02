@@ -72,3 +72,4 @@ curl -X POST "http://localhost:8000/api/voice-detection" \
 - The API accepts Base64-encoded MP3 audio files
 - Supported languages: Tamil, English, Hindi, Malayalam, Telugu
 
+
