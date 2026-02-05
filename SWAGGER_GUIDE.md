@@ -1,6 +1,6 @@
 # Swagger/OpenAPI Documentation Guide
 
-## 📚 Accessing Swagger UI
+##  Accessing Swagger UI
 
 The API includes comprehensive Swagger/OpenAPI documentation that can be accessed in two ways:
 
@@ -24,7 +24,7 @@ This provides a clean, readable documentation format.
 
 This returns the raw OpenAPI schema in JSON format, useful for API clients and code generation.
 
-## 🔐 Authentication in Swagger
+##  Authentication in Swagger
 
 When testing endpoints in Swagger UI:
 
@@ -33,15 +33,15 @@ When testing endpoints in Swagger UI:
 3. Click **"Authorize"** to save
 4. Now you can test protected endpoints directly from Swagger UI
 
-## 📋 Features Included
+##  Features Included
 
 ### Enhanced Documentation
-- ✅ Detailed endpoint descriptions
-- ✅ Request/response examples
-- ✅ Field descriptions and constraints
-- ✅ Error response examples
-- ✅ Tag-based organization
-- ✅ Security scheme documentation
+-  Detailed endpoint descriptions
+-  Request/response examples
+-  Field descriptions and constraints
+-  Error response examples
+-  Tag-based organization
+-  Security scheme documentation
 
 ### Endpoints Documented
 - **GET /** - Root endpoint (public)
@@ -55,7 +55,7 @@ Each endpoint includes:
 - Example error responses
 - Field descriptions and types
 
-## 🚀 Testing with Swagger UI
+##  Testing with Swagger UI
 
 1. Start the server:
    ```bash
@@ -80,10 +80,9 @@ Each endpoint includes:
 
 7. View the response below with classification results
 
-## 📝 Notes
+## Notes
 
 - Health endpoints (`/` and `/health`) are public and don't require authentication
 - Only `/api/voice-detection` requires API key authentication
 - All examples in Swagger are interactive and can be tested directly
 - The API key can be set globally using the "Authorize" button
-

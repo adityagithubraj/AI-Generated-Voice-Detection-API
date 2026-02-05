@@ -73,3 +73,4 @@ curl -X POST "http://localhost:8000/api/voice-detection" \
 - Supported languages: Tamil, English, Hindi, Malayalam, Telugu
 
 
+

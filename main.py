@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from fastapi.openapi.utils import get_openapi
 from typing import Annotated
 import config
-from models.request_models import VoiceDetectionRequest, VoiceDetectionResponse
+from models.request_models import VoiceDetectionRequest, VoiceDetectionResponse, HealthResponse
 from middleware.auth import verify_api_key
 from utils.audio_processor import decode_base64_audio, save_temp_audio
 from utils.voice_detector import VoiceDetector
@@ -17,31 +17,40 @@ import os
 app = FastAPI(
     title="AI-Generated Voice Detection API",
     description="""
-    ## 🎯 AI-Generated Voice Detection API
+    ## AI-Generated Voice Detection API
     
-    A secure REST API to detect whether a voice sample is **AI-generated** or **Human**.
+    A secure REST API to detect whether a voice sample is AI-generated or Human.
+
+    ### Quick Checks
+    - Health check: GET /health (no API key required)
+    - API documentation: GET /docs
+    - Root endpoint: GET / (returns API information)
     
-    ### 🌍 Supported Languages
+    ### Supported Languages
+    The API supports the following languages:
     - Tamil
     - English
     - Hindi
     - Malayalam
     - Telugu
     
-    ### 🔐 Authentication
-    All requests require a valid API key in the `x-api-key` header.
+    ### Authentication
+    All voice detection requests require a valid API key in the x-api-key header. 
+    Health check and root endpoints are publicly accessible without authentication.
     
-    ### 📋 Features
+    ### Features
     - Accepts Base64-encoded MP3 audio files
-    - Returns classification with confidence score
-    - Provides human-readable explanations
+    - Returns classification result (AI_GENERATED or HUMAN)
+    - Provides confidence score from 0.0 to 1.0
+    - Includes human-readable explanations for the classification
     - Supports multiple Indian languages
     
-    ### 📝 Usage
-    1. Encode your MP3 audio file to Base64
-    2. Send a POST request to `/api/voice-detection`
-    3. Include your API key in the `x-api-key` header
-    4. Receive classification results with confidence score
+    ### Usage
+    To use the voice detection endpoint:
+    1. Encode your MP3 audio file to Base64 format
+    2. Send a POST request to /api/voice-detection
+    3. Include your API key in the x-api-key header
+    4. Receive classification results with confidence score and explanation
     """,
     version="1.0.0",
     terms_of_service="https://example.com/terms/",
@@ -72,8 +81,8 @@ voice_detector = VoiceDetector()
     "/",
     tags=["Health"],
     summary="Root endpoint",
-    description="Returns API information and supported languages",
-    response_description="API information"
+    description="Returns API info and supported languages (no API key required).",
+    response_description="API information",
 )
 async def root():
     """
@@ -95,7 +104,14 @@ async def root():
     tags=["Health"],
     summary="Health check",
     description="Check if the API is running and healthy",
-    response_description="Health status"
+    response_description="Health status",
+    response_model=HealthResponse,
+    responses={
+        200: {
+            "description": "API is healthy",
+            "content": {"application/json": {"example": {"status": "healthy"}}},
+        }
+    },
 )
 async def health_check():
     """
@@ -104,7 +120,7 @@ async def health_check():
     Use this endpoint to verify that the API is running correctly.
     Returns a simple status indicator.
     """
-    return {"status": "healthy"}
+    return HealthResponse(status="healthy")
 
 
 @app.post(

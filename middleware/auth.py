@@ -25,12 +25,16 @@ async def verify_api_key(x_api_key: Annotated[str | None, Header(alias="x-api-ke
             detail="Missing API key. Please provide x-api-key header."
         )
     
-    if x_api_key != config.API_KEY:
+    # Normalize to avoid accidental whitespace/quote mismatches from clients or env files
+    provided = x_api_key.strip()
+    expected = str(config.API_KEY).strip()
+    if provided != expected:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid API key"
         )
     
-    return x_api_key
+    return provided
+
 
 

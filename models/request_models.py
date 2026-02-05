@@ -109,3 +109,20 @@ class VoiceDetectionResponse(BaseModel):
         examples=["Invalid API key", "Invalid audio data: Invalid Base64 encoding"]
     )
 
+
+class HealthResponse(BaseModel):
+    """Response model for health endpoint"""
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "status": "healthy"
+            }
+        }
+    )
+
+    status: Literal["healthy"] = Field(
+        ...,
+        description="Health status of the API",
+        examples=["healthy"]
+    )
+

@@ -4,7 +4,7 @@ A secure REST API to detect whether a given voice sample is **AI-generated** or 
 
 ---
 
-## 🚀 Problem Overview
+##  Problem Overview
 Modern AI systems can generate highly realistic human-like voices, making it difficult to distinguish between real human speech and synthetic audio.
 
 This project provides an API-based solution that analyzes voice samples and classifies them as:
@@ -15,7 +15,7 @@ Supported across **Tamil, English, Hindi, Malayalam, and Telugu**.
 
 ---
 
-## 🌍 Supported Languages (Fixed)
+##  Supported Languages (Fixed)
 - Tamil
 - English
 - Hindi
@@ -26,7 +26,7 @@ Each API request must contain **one audio file in one language**.
 
 ---
 
-## 🧠 Features
+## Features
 - Accepts **Base64-encoded MP3 audio**
 - Supports **single audio per request**
 - Returns **classification + confidence score**
@@ -36,7 +36,7 @@ Each API request must contain **one audio file in one language**.
 
 ---
 
-## 📦 API Specification
+##  API Specification
 
 ### Endpoint
 ```
@@ -45,7 +45,7 @@ POST /api/voice-detection
 
 ---
 
-### 🔐 Authentication
+###  Authentication
 All requests must include a valid API key in headers:
 
 ```
@@ -56,7 +56,26 @@ Requests without a valid API key will be rejected.
 
 ---
 
-### 📥 Request Body
+##  Simple CLI (Voice Check)
+
+You can test the API from the command line without manually Base64-encoding audio:
+
+```bash
+# Start the server
+python run.py
+
+# Health check
+python cli.py health
+
+# Voice check
+python cli.py detect sample.mp3 Tamil
+```
+
+The CLI reads `API_KEY` from your `.env` file / environment variables, or you can pass `--api-key`.
+
+---
+
+### Request Body
 
 ```json
 {
@@ -75,7 +94,7 @@ Requests without a valid API key will be rejected.
 
 ---
 
-### 📤 Success Response
+###  Success Response
 
 ```json
 {
@@ -98,7 +117,7 @@ Requests without a valid API key will be rejected.
 
 ---
 
-### ❌ Error Response
+###  Error Response
 
 ```json
 {
@@ -109,7 +128,7 @@ Requests without a valid API key will be rejected.
 
 ---
 
-## 📋 Input Rules
+##  Input Rules
 - Audio format: **MP3 only**
 - Input must be **Base64 encoded**
 - One audio file per request
@@ -117,7 +136,7 @@ Requests without a valid API key will be rejected.
 
 ---
 
-## ⚖️ Classification Rules
+##  Classification Rules
 - `AI_GENERATED` → Voice created using AI or synthetic systems
 - `HUMAN` → Voice spoken by a real human
 
@@ -125,42 +144,8 @@ Requests without a valid API key will be rejected.
 
 ---
 
-## 🧪 Evaluation Process
-- One Base64 MP3 is sent per request
-- Language is one of the five supported
-- API analyzes and classifies the audio
-- JSON response is returned
-- Multiple requests are made during evaluation
 
----
 
-## 🏆 Evaluation Criteria
-- 🎯 Accuracy of AI vs Human detection
-- 🌍 Consistency across all supported languages
-- 📦 Correct API request & response format
-- ⚡ Reliability and response time
-- 🧠 Quality of explanation
 
----
 
-## 🚫 Rules & Constraints
-- ❌ Hard-coded results are strictly prohibited
-- ❌ Data misuse leads to disqualification
-- ⚠️ External AI-detection APIs may be restricted
-- ✅ Ethical and transparent AI usage is mandatory
-
----
-
-## 📎 Sample Reference Audio
-- Drive link: `sample voice 1.mp3`
-
----
-
-## 📝 One-Line Summary
-Build a secure REST API that accepts a Base64-encoded MP3 voice in Tamil, English, Hindi, Malayalam, or Telugu and accurately identifies whether it is **AI-generated** or **Human**.
-
----
-
-## 📬 Contact
-For queries or integration support, please contact the project maintainer.
 

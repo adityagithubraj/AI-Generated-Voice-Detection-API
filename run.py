@@ -1,6 +1,4 @@
-"""
-Simple script to run the API server
-"""
+
 import uvicorn
 
 if __name__ == "__main__":
@@ -10,3 +8,4 @@ if __name__ == "__main__":
         port=8000,
         reload=True
     )
+
